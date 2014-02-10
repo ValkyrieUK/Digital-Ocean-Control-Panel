@@ -1,0 +1,33 @@
+<table border="1">
+  <tr>
+    <th>Server Name</th>
+    <th>Address</th>
+    <th>ID</th>
+    <th>Regions</th>
+    <th>Actions</th>
+  </tr>
+  <tr>
+<% @droplets.each do |d| %>
+    <% if d.status == "active" %>
+      <td style="background-color:lime;"><%= d.name %></td>
+    <% else %>
+      <td style="background-color:red;"><%= d.name %></td>
+    <% end %>
+    <td><%= d.ip_address %></td>
+    <td><%= d.id %></td>
+    <% case d.region_id %>
+      <% when 2 %>
+    <td>Amsterdam 1</td>
+      <% when 3 %>
+    <td>San Francisco 1 2</td>
+      <% when 4 %>
+    <td>New York 2</td>
+      <% when 5 %>
+    <td>Amsterdam 2</td>
+    <% end %>
+    <td><%= link_to 'Power cycle', home_power_cycle_path(d.id) %></td>
+    <td><%= link_to 'Power off', home_power_off_path(d.id) %></td>
+    <td><%= link_to 'Power on', home_power_on_path(d.id) %></td>
+  </tr>
+<% end %>
+</table>
